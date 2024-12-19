@@ -1,9 +1,0 @@
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\bin\Release\WeapFuncs.net.dll
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\bin\Release\WeapFuncs.net.pdb
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\bin\Release\ScriptHookDotNet.dll
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\bin\Release\ScriptHookDotNet.xml
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\obj\Release\WeapFuncs.net.csproj.AssemblyReference.cache
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\obj\Release\WeapFuncs.net.csproj.CoreCompileInputs.cache
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\obj\Release\WeapFunc.8ED23D84.Up2Date
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\obj\Release\WeapFuncs.net.dll
-C:\Users\63998\source\repos\WeapFuncs.net\WeapFuncs.net\obj\Release\WeapFuncs.net.pdb
