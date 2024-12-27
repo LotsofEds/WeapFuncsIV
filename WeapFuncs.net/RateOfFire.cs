@@ -125,6 +125,7 @@ namespace WeapFuncs.net
                 {
                     if (!Game.Exists(ped)) continue;
                     if (!ped.isAliveAndWell) continue;
+                    if (!ped.isShooting) continue;
                     if (ped.Weapons.Current == ped.Weapons.AnyMelee) continue;
                     if (ped.Weapons.Current == Weapon.Unarmed) continue;
 
