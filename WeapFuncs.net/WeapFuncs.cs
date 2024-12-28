@@ -9,6 +9,16 @@ namespace WeapFuncs.net
 {
     internal class WeapFuncs
     {
+        public static AnimationSet pistol = new AnimationSet("gun@handgun");
+        public static AnimationSet deagle = new AnimationSet("gun@deagle");
+        public static AnimationSet uzi = new AnimationSet("gun@uzi");
+        public static AnimationSet mp5 = new AnimationSet("gun@mp5k");
+        public static AnimationSet ak = new AnimationSet("gun@ak47");
+        public static AnimationSet cz = new AnimationSet("gun@cz75");
+        public static AnimationSet mag = new AnimationSet("gun@44a");
+        public static AnimationSet p90 = new AnimationSet("gun@p90");
+        public static AnimationSet gold = new AnimationSet("gun@gold_uzi");
+        public static AnimationSet m249 = new AnimationSet("gun@m249");
         public static void Tick()
         {
             GTA.Native.Pointer AnimPointer = 0.0;
@@ -17,7 +27,6 @@ namespace WeapFuncs.net
                 Main.CurrEp = GTA.Native.Function.Call<int>("GET_CURRENT_EPISODE");
                 if (Main.ReloadInVehicles == true)
                 {
-                    GTA.Native.Function.Call("REQUEST_ANIMS", "gun@handgun");
                     if (Game.LocalPlayer.Character.Weapons.Current == Weapon.Handgun_Glock && !GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@handgun", "reload") && Game.LocalPlayer.Character.isSittingInVehicle() && Game.LocalPlayer.Character.Weapons.Current.AmmoInClip == 0)
                     {
                         if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow_conv", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "bl_aim_loop"))
@@ -25,24 +34,21 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_glock", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM", Game.LocalPlayer.Character, "reload", "gun@handgun", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(pistol, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
                             Main.gunmodel = World.CreateObject("w_glock", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@handgun", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(pistol, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
                             Main.gunmodel = World.CreateObject("w_glock", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@handgun", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(pistol, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                     }
                     if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@handgun", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
@@ -62,24 +68,21 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_eagle", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@deagle", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(deagle, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
                             Main.gunmodel = World.CreateObject("w_eagle", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@deagle", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(deagle, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
                             Main.gunmodel = World.CreateObject("w_eagle", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@deagle", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(deagle, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                     }
                     if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@deagle", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
@@ -96,35 +99,32 @@ namespace WeapFuncs.net
                     {
                         if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow_conv", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "bl_aim_loop"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@uzi");
                             Main.gunmodel = World.CreateObject("w_uzi", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@uzi", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(uzi, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@uzi");
                             Main.gunmodel = World.CreateObject("w_uzi", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@uzi", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(uzi, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@uzi");
                             Main.gunmodel = World.CreateObject("w_uzi", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.14f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@uzi", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
+                            Game.LocalPlayer.Character.Animation.Play(uzi, "reload", 1.0f, AnimationFlags.Unknown09);
+                        }
+                    }
+                    if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@uzi", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
+                    {
+                        GTA.Native.Function.Call("GET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@uzi", "reload", AnimPointer);
+                        if (AnimPointer > 0.9 && Main.gunmodel.Exists() && Main.gunmodel != null)
+                        {
+                            GTA.Native.Function.Call("SET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@uzi", "reload", 1.0);
                             Main.gunmodel.Delete();
                         }
                     }
@@ -133,38 +133,35 @@ namespace WeapFuncs.net
                     {
                         if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebylow_conv", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "bl_aim_loop"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@mp5k");
                             Main.gunmodel = World.CreateObject("w_mp5", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@mp5k", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(mp5, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@mp5k");
                             Main.gunmodel = World.CreateObject("w_mp5", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@mp5k", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(mp5, "reload", 1.0f, AnimationFlags.Unknown09);
 
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@mp5k");
                             Main.gunmodel = World.CreateObject("w_mp5", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, 0.0f, 0.0f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@mp5k", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(mp5, "reload", 1.0f, AnimationFlags.Unknown09);
 
+                        }
+                    }
+                    if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@mp5k", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
+                    {
+                        GTA.Native.Function.Call("GET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@mp5k", "reload", AnimPointer);
+                        if (AnimPointer > 0.9 && Main.gunmodel.Exists() && Main.gunmodel != null)
+                        {
+                            GTA.Native.Function.Call("SET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@mp5k", "reload", 1.0);
+                            Main.gunmodel.Delete();
                         }
                     }
 
@@ -172,15 +169,20 @@ namespace WeapFuncs.net
                     {
                         if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@ak47");
                             Main.gunmodel = World.CreateObject("w_ak47", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.3f, 0.0f, -0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@ak47", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(ak, "reload", 1.0f, AnimationFlags.Unknown09);
 
+                        }
+                    }
+                    if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@ak47", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
+                    {
+                        GTA.Native.Function.Call("GET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@ak47", "reload", AnimPointer);
+                        if (AnimPointer > 0.9 && Main.gunmodel.Exists() && Main.gunmodel != null)
+                        {
+                            GTA.Native.Function.Call("SET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@ak47", "reload", 1.0);
+                            Main.gunmodel.Delete();
                         }
                     }
 
@@ -188,14 +190,10 @@ namespace WeapFuncs.net
                     {
                         if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop"))
                         {
-                            AnimationSet rloadveh = new AnimationSet("gun@ak47");
                             Main.gunmodel = World.CreateObject("w_m4", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.23f, 0.0f, -0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@ak47", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(ak, "reload", 1.0f, AnimationFlags.Unknown09);
 
                         }
                     }
@@ -207,24 +205,21 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e1_cz75", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.04f, -0.02f, -0.01f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@cz75", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(cz, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
                             Main.gunmodel = World.CreateObject("w_e1_cz75", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.04f, -0.02f, -0.01f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@cz75", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(cz, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
                             Main.gunmodel = World.CreateObject("w_e1_cz75", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.04f, -0.02f, -0.01f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@cz75", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(cz, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                     }
                     if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@cz75", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
@@ -244,24 +239,21 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_44amag", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, -0.02f, -0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@44a", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(mag, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
                             Main.gunmodel = World.CreateObject("w_e2_44amag", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, -0.02f, -0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@44a", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(mag, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
                             Main.gunmodel = World.CreateObject("w_e2_44amag", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, -0.02f, -0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@44a", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
+                            Game.LocalPlayer.Character.Animation.Play(mag, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                     }
                     if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@44a", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
@@ -282,10 +274,7 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_p90", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, 0.0f, 0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@p90", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(p90, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
@@ -293,10 +282,7 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_p90", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, 0.0f, 0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@p90", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(p90, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
@@ -304,9 +290,16 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_p90", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.0f, 0.0f, 0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@p90", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
+                            Game.LocalPlayer.Character.Animation.Play(p90, "reload", 1.0f, AnimationFlags.Unknown09);
+                        }
+                    }
+
+                    if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@p90", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
+                    {
+                        GTA.Native.Function.Call("GET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@p90", "reload", AnimPointer);
+                        if (AnimPointer > 0.9 && Main.gunmodel.Exists() && Main.gunmodel != null)
+                        {
+                            GTA.Native.Function.Call("SET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@p90", "reload", 1.0);
                             Main.gunmodel.Delete();
                         }
                     }
@@ -319,10 +312,7 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_uzi", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.13f, 0.0f, 0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@gold_uzi", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(gold, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebytruck", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyairtug", "ps_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebystd", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyvan", "br_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_spee", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ds_aim_loop") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_stnd", "br_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyboat_big", "ds_aim_loop"))
                         {
@@ -330,10 +320,7 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_uzi", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.13f, 0.0f, 0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@gold_uzi", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(gold, "reload", 1.0f, AnimationFlags.Unknown09);
                         }
                         else if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "ps_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "bl_aim_loop_1h") || GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "veh@drivebyheli", "br_aim_loop_1h"))
                         {
@@ -341,9 +328,16 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_uzi", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.13f, 0.0f, 0.02f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@gold_uzi", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
+                            Game.LocalPlayer.Character.Animation.Play(gold, "reload", 1.0f, AnimationFlags.Unknown09);
+                        }
+                    }
+
+                    if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@gold_uzi", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
+                    {
+                        GTA.Native.Function.Call("GET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@gold_uzi", "reload", AnimPointer);
+                        if (AnimPointer > 0.9 && Main.gunmodel.Exists() && Main.gunmodel != null)
+                        {
+                            GTA.Native.Function.Call("SET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@gold_uzi", "reload", 1.0);
                             Main.gunmodel.Delete();
                         }
                     }
@@ -356,11 +350,18 @@ namespace WeapFuncs.net
                             Main.gunmodel = World.CreateObject("w_e2_m249", Game.LocalPlayer.Character.Position);
                             Main.gunmodel.Collision = false;
                             Main.gunmodel.AttachToPed(Game.LocalPlayer.Character, Bone.RightHand, new Vector3(0.08f, 0.0f, 0.03f), Vector3.Zero);
-                            GTA.Native.Function.Call("TASK_PLAY_ANIM_UPPER_BODY", Game.LocalPlayer.Character, "reload", "gun@m249", 0.80, 0, 1, 0, 0, -1);
-                            Game.WaitInCurrentScript(10);
-                            Game.LocalPlayer.Character.Animation.WaitUntilFinished(rloadveh, "reload");
-                            Main.gunmodel.Delete();
+                            Game.LocalPlayer.Character.Animation.Play(m249, "reload", 1.0f, AnimationFlags.Unknown09);
 
+                        }
+                    }
+
+                    if (GTA.Native.Function.Call<bool>("IS_CHAR_PLAYING_ANIM", Game.LocalPlayer.Character, "gun@m249", "reload") && Game.LocalPlayer.Character.isSittingInVehicle())
+                    {
+                        GTA.Native.Function.Call("GET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@m249", "reload", AnimPointer);
+                        if (AnimPointer > 0.9 && Main.gunmodel.Exists() && Main.gunmodel != null)
+                        {
+                            GTA.Native.Function.Call("SET_CHAR_ANIM_CURRENT_TIME", Game.LocalPlayer.Character, "gun@m249", "reload", 1.0);
+                            Main.gunmodel.Delete();
                         }
                     }
                 }
