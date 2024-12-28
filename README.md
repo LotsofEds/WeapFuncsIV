@@ -1,2 +1,2 @@
 # WeapFuncsIV
-A Grand Theft Auto IV mod that does some stuff with weapons, mostly regarding animations.
+A Grand Theft Auto IV mod that tweaks weapon animations and adds some extra functions.
