@@ -24,11 +24,13 @@ namespace WeapFuncs.net
         {
             LoadINI();
             RateOfFire.LoadINI();
+            ReloadSpeed.LoadINI();
             this.Tick += new EventHandler(this.ScriptCommunicationExample2_Tick);
         }
         private void ScriptCommunicationExample2_Tick(object sender, EventArgs e)
         {
             WeapFuncs.Tick();
+            ReloadSpeed.Tick();
             if (GlobalRateOfFire)
                 RateOfFire.Tick();
             if (SemiAutoShotgunBlindfire)

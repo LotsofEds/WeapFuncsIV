@@ -49,6 +49,7 @@
     <Compile Include="NPCSemiAutoShot.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="RateOfFire.cs" />
+    <Compile Include="ReloadSpeed.cs" />
     <Compile Include="ShotgunBlindfireFix.cs" />
     <Compile Include="WeapFuncs.cs" />
   </ItemGroup>
